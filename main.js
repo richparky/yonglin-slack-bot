@@ -37,11 +37,11 @@ if (req.body.event.subtype != 'bot_message') { // se we won't reply to ourselves
         }
         else {
           const coindesk = JSON.parse(body);
-          const rate = +coindesk.bpi.CNY.rate.replace(',', '');
+          const rrate = +coindesk.bpi.CNY.rate.replace(',', '');
           const multiplier = +req.body.event.text;
           const reply = {
             'channel': req.body.event.channel,
-            text: `Current BTC value: ${multiplier} BTC is ${rate*multiplier} CNY`
+            text: `Current BTC value: ${multiplier} BTC is ${rrate*multiplier} CNY`
           }
 
           const options = {
