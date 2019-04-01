@@ -22,3 +22,45 @@ app.post('/action-endpoint', function (req, res) {
   };
   res.json(reply);
 });
+
+  const headers = {
+    'Content-type': 'application/json',
+    'Authorization': `Bearer ${process.env.xoxp-585894373184-587053537488-595959515174-e297f6792bfd700b5a30b40467577c13}` // this token you need to set on heroku
+  }
+
+  // console.log(req.body.event);
+
+  if (req.body.event.subtype != 'bot_message') { // se we won't reply to ourselves...
+    request.get('https://api.coindesk.com/v1/bpi/currentprice/EUR.json', function(err, res, body) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        const coindesk = JSON.parse(body);
+        const rate = coindesk.bpi.EUR.rate;
+        const reply = {
+          'channel': req.body.event.channel,
+          text: `Current BTC rate: ${rate} EUR per 1 BTC`
+        }
+
+        const options = {
+          url:   'https://slack.com/api/chat.postMessage',
+          method: 'POST',
+          headers,
+          body:  JSON.stringify(reply)
+        };
+
+        console.log(body);
+
+        request.post(options, function(err, res, body) {
+          if (err) {
+            console.log(err);
+          }
+        });
+      }
+    });
+  }
+
+
+  res.json(reply);
+});
