@@ -41,7 +41,7 @@ if (req.body.event.subtype != 'bot_message') { // se we won't reply to ourselves
           const multiplier = +req.body.event.text;
           const reply = {
             'channel': req.body.event.channel,
-            text: `Current BTC value: ${rate*multiplier} EUR per ${multiplier} BTC`
+            text: `Current BTC value: ${(rate)*(multiplier)} EUR per ${multiplier} BTC`
           }
 
           const options = {
