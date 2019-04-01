@@ -25,7 +25,7 @@ app.post('/action-endpoint', function (req, res) {
 
   const headers = {
     'Content-type': 'application/json',
-    'Authorization': `Bearer ${process.env.xoxp-585894373184-587053537488-595959515174-e297f6792bfd700b5a30b40467577c13}` // this token you need to set on heroku
+    'Authorization': `Bearer ${process.env.xoxb-585894373184-585802238833-zfGs2DfyRYLC34J260weuUPU}` // this token you need to set on heroku
   }
 
   // console.log(req.body.event);
