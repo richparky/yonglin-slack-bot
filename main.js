@@ -38,9 +38,10 @@ if (req.body.event.subtype != 'bot_message') { // se we won't reply to ourselves
         else {
           const coindesk = JSON.parse(body);
           const rate = coindesk.bpi.EUR.rate;
+          const multiplier = req.body.event.text;
           const reply = {
             'channel': req.body.event.channel,
-            text: `Current BTC rate: ${rate} EUR per 1 BTC`
+            text: `Current BTC value: ${rate*multiplier} EUR per ${multiplier} BTC`
           }
 
           const options = {
