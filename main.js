@@ -31,17 +31,17 @@ app.post('/action-endpoint', function (req, res) {
   // console.log(req.body.event);
 
 if (req.body.event.subtype != 'bot_message') { // se we won't reply to ourselves...
-      request.get('https://api.coindesk.com/v1/bpi/currentprice/CNY.json', function(err, res, body) {
+      request.get('https://api.coindesk.com/v1/bpi/currentprice/USD.json', function(err, res, body) {
         if (err) {
           console.log(err);
         }
         else {
           const coindesk = JSON.parse(body);
-          const rrate = +coindesk.bpi.CNY.rate.replace(',', '');
+          const rate = +coindesk.bpi.USD.rate.replace(',', '');
           const multiplier = +req.body.event.text;
           const reply = {
             'channel': req.body.event.channel,
-            text: `Current BTC value: ${multiplier} BTC is ${rrate*multiplier} CNY`
+            text: `Current BTC value: ${multiplier} BTC is ${rate*multiplier} USD`
           }
 
           const options = {
